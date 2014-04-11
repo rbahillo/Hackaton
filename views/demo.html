@@ -20,7 +20,7 @@
 		.clear{clear:both;}
 		.none{display:none}
 		table{margin:0 auto 10px auto;border:1px solid #ccc;box-shadow:3px 3px 10px #999;}
-		td{width:6px;height:6px;border:1px solid #fff;cellpadding:0;cellspacing:0;}
+		td{width:16px;height:16px;border:1px solid #fff;cellpadding:0;cellspacing:0;}
 		td.snakeCell{background:#000;-moz-border-radius:5px;border:1px solid #000;box-shadow:1px 1px 1px #aaa;}
 		td.snakeHead{background:red;-moz-border-radius:5px;border:1px solid red;}	
 		td.fruitCell{background:green;-moz-border-radius:5px;border:1px solid green;box-shadow:1px 1px 1px #aaa;}
@@ -30,16 +30,16 @@
 	</style>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, size = 40;
+		var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, size = 30;
 		var snakeCells = [
 			[ 10, 14 ],
 			[ 10, 13 ],
 			[ 10, 12 ],
 			[ 10, 11 ],
 			[ 10, 10 ],
-			[ 10, 9 ],
+			[ 10, 9 ]/*,
 			[ 10, 8 ],
-			[ 10, 7 ]
+			[ 10, 7 ]*/
 		];
 		var snakeHead = [ 10, 14 ];
 		
@@ -99,7 +99,7 @@
 						renderFruitCell();
 						score += 100;
 						$( '#scoreBoard' ).html( 'Your Score : ' + score );
-						speed = speed - 10 > 5 ? speed - 10 : speed;
+						speed = speed - 5 > 5 ? speed - 5 : speed;
 						clearInterval( ticker );
 						startGame();
 					}
