@@ -10,6 +10,7 @@ var http = require('http');
 var path = require('path');
 
 //New Code
+<<<<<<< HEAD
 var mongo = require('mongodb');
 var monk = require('monk');
 //var db = monk('localhost:27017/test');
@@ -24,8 +25,6 @@ db.open(function (error, client) {
 	collection = new mongo.Collection(client, 'usercollection');
 })
 
-
-	
 
 var app = express();
 
