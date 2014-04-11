@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1.
+        TOP CATCHERS
+    ul
+        each user, i in userlist
+            li
+               #{i+1}. #{user.alias} #{user.best}
