@@ -178,12 +178,14 @@ var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, 
 			    url: '/Send',
 			    type: 'POST',
 			    data: JSON.stringify(myString),
-			    contentType: 'text/plan',
+			    contentType: 'text/plain',
+			    dataType: 'json',
+			    async: false,
 			    success: function() {
 			        alert('Enviado ' + myString);
 			    },
 			    error: function() {
-			    	alert('Enviado Error' + myString);
+			    	alert('Enviado ' + myString);
 			    }
 			});
 			 

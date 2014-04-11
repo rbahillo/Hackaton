@@ -10,7 +10,6 @@ var http = require('http');
 var path = require('path');
 
 //New Code
-<<<<<<< HEAD
 var mongo = require('mongodb');
 var monk = require('monk');
 //var db = monk('localhost:27017/test');
@@ -42,7 +41,8 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.bodyParser()); 
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); 
 
 
 /* Starts serving html */ 
@@ -54,7 +54,7 @@ app.get('/demo', function (req, res)
 });
 
 app.get('/Send', function(req, res){ // Specifies which URL to listen for
-	  req.body
+	console.log(req.body);
 	  newstuff = [{ "alias" : "testuser1", "email" : "testuser3@testdomain.com" , "score" : "30"}]
 	  collection.find({email: newstuff[0].email}).toArray( function(err, results){
 		  user = results[0];
@@ -67,9 +67,7 @@ app.get('/Send', function(req, res){ // Specifies which URL to listen for
 			  console.log(user);
 			  collection.save(user, {w: 1}, function(err, records){
 				   docs = collection.find().sort({best:1}).toArray(function(e,docs){
-				   res.render('userlist', {
-			            "userlist" : docs
-			        });
+					   res.json(docs);
 				   });
 				    });
 		  }
