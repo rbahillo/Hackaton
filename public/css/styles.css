@@ -4,17 +4,29 @@
 		.container h3{margin:10px 0;}
 		.clear{clear:both;}
 		.none{display:none}
-		table{margin:0 auto 0px auto;border:1px solid #ccc;box-shadow:3px 3px 10px #999;background-image:url(../../public/images/sky.png)}
+		table{margin:0 auto 0px auto;border:1px solid #ccc;box-shadow:3px 3px 10px #999;background-image:url(../images/sky.png)}
 		td{width:24px;height:24px;border:1px solid transparent;cellpadding:0px;cellspacing:0px;}
 		td.snakeCellPassenger{background:brown;-moz-border-radius:5px;border:1px solid #000;box-shadow:1px 1px 1px #aaa;}
-		td.snakeCell{background:#000;-moz-border-radius:5px;border:1px solid #000;box-shadow:1px 1px 1px #aaa;}
-		td.snakeHead{background:red;-moz-border-radius:5px;border:1px solid red;}
-		td.adultPassenger{background:blue;-moz-border-radius:5px;border:1px solid green;box-shadow:1px 1px 1px #aaa;}
-		td.childPassenger{background:orange;-moz-border-radius:5px;border:1px solid green;box-shadow:1px 1px 1px #aaa;}
-		td.elderPassenger{background:purple;-moz-border-radius:5px;border:1px solid green;box-shadow:1px 1px 1px #aaa;}
-		td.fruitCell{background:green;-moz-border-radius:5px;border:1px solid green;box-shadow:1px 1px 1px #aaa;}
+		td.snakeCell{background:black;-moz-border-radius:5px;border:1px solid #000;box-shadow:1px 1px 1px #aaa;}
+		/*td.snakeHead{background:red;-moz-border-radius:0px;border:1px solid red;}*/
+		
+		td.snakeHeadU{background-image:url(../images/avionFrontU.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeHeadD{background-image:url(../images/avionFrontD.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeHeadL{background-image:url(../images/avionFrontL.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeHeadR{background-image:url(../images/avionFrontR.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeBackU{background-image:url(../images/avionBackU.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeBackD{background-image:url(../images/avionBackD.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeBackL{background-image:url(../images/avionBackL.gif);-moz-border-radius:0px;border:0px solid red;}
+		td.snakeBackR{background-image:url(../images/avionBackR.gif);-moz-border-radius:0px;border:0px solid red;}
+		
+		
+		td.adultPassenger{background-image:url(../images/fruit1.gif);}
+		td.childPassenger{background-image:url(../images/fruit2.gif);}
+		td.elderPassenger{background-image:url(../images/fruit3.gif);}
+		td.fruitCell{background-image:url(../images/fruit7.gif);}
 		#scoreBoard{text-shadow:2px 2px 1px #fff;box-shadow:0 -3px 5px #aaa;width:382px;margin:5px auto 0 auto;border:1px solid #ccc;background:#eee;font-weight:bold;padding:10px;}
 		.gameOver{font-weight:bold;text-shadow:2px 2px 1px #fff;position:absolute;top:0;left:550px;background:#eee;color:red;width:70px;border:50px solid #eee;text-align:center;-moz-border-radius:90px;-webkit-border-radius:90px;border-radius:90px;box-shadow:3px 3px 10px #999;}
+		
 		
 #puntuacion {
 		border: 5px solid #FF0000;
@@ -48,4 +60,50 @@
 	font-size: 25px;
 	margin-top: 10px;
 	margin-bottom: 10px;	
+}
+
+#totalScoreHtml {
+		border: 5px solid #FF0000;
+		background: orange;
+		display: none;		
+		font-weight: bold;
+		height: 350px;
+		margin: 150px;
+		position: absolute;
+		text-align: center;
+		text-shadow: 2px 2px 1px #FFFFFF;
+		width: 600px;		
+		}
+#row { 
+	 
+	height:25px; 
+	width: 600px;		
+		
+}
+#col1 { 
+	
+	text-align: center; 
+	vertical-align: top; 
+	width: 200px;	
+	height:25px; 
+	float:left;
+}
+#col2 { 
+	
+	text-align: center; 
+	vertical-align: top; 
+	border-style: solid; 
+	border-width: 2px;
+	width: 200px;	
+	height:100px; 
+}
+#col3 { 
+	
+	text-align: center; 
+	vertical-align: top; 
+	border-style: solid; 
+	border-width: 2px;
+	width: 200px;	
+	height:100px; 
+	float:right;
 }

@@ -54,8 +54,9 @@ app.get('/demo', function (req, res)
 });
 
 app.get('/Send', function(req, res){ // Specifies which URL to listen for
-	console.log(req.body);
-	  newstuff = [{ "alias" : "testuser1", "email" : "testuser3@testdomain.com" , "score" : "30"}]
+	console.log(req.query.alias);
+	
+	  newstuff = [{ "alias" : req.query.alias, "email" : req.query.email , "score" : req.query.score}]
 	  collection.find({email: newstuff[0].email}).toArray( function(err, results){
 		  user = results[0];
 		  if(user!=null){
@@ -66,7 +67,7 @@ app.get('/Send', function(req, res){ // Specifies which URL to listen for
 			  user.total=parseInt(user.total)+parseInt(newstuff[0].score)
 			  console.log(user);
 			  collection.save(user, {w: 1}, function(err, records){
-				   docs = collection.find().sort({best:1}).toArray(function(e,docs){
+				   docs = collection.find().sort({best:-1}).toArray(function(e,docs){
 					   res.json(docs);
 				   });
 				    });
@@ -78,10 +79,8 @@ app.get('/Send', function(req, res){ // Specifies which URL to listen for
 			  user.best=newstuff[0].score
 			  user.total=newstuff[0].score
 			  collection.insert(user, {w: 1}, function(err, records){
-				  docs = collection.find().sort({best:1}).toArray(function(e,docs){
-					   res.render('userlist', {
-				            "userlist" : docs
-				        });
+				  docs = collection.find().sort({best:-1}).toArray(function(e,docs){
+					  	res.json(docs);
 					   });
 					    });
 		  }

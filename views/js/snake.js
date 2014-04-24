@@ -179,8 +179,9 @@ var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, 
 			    type: 'POST',
 			    data: JSON.stringify(myString),
 			    contentType: 'text/plan',
-			    success: function() {
+			    success: function(responseData) {
 			        alert('Enviado ' + myString);
+			        alert('Recibido ' + responseData);
 			    },
 			    error: function() {
 			    	alert('Enviado Error' + myString);

@@ -10,19 +10,24 @@ var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, 
 			[ 10, 7 ]*/
 		];
 		var snakeHead = [ 10, 14, 1 ];
+		var snakeBack = [ 10, 10, 4 ];
+		var snakeClassHead = '';
+		var snakeClassBack = '';
 		
 		function renderSnake (){
-			$('td').removeClass('snakeCell snakeHead snakeCellPassenger');
-			//alert(snakeCells[0][2].value);
+			$('td').removeClass('snakeCell snakeHead snakeCellPassenger snakeHeadU snakeHeadD snakeHeadL snakeHeadR snakeBack snakeBackU snakeBackD snakeBackL snakeBackR');
+			
 			for (var cell in snakeCells ){
 				//alert(snakeCells[0][1]);
-				$('tr').eq( snakeCells[cell][0] ).find('td').eq(snakeCells[cell][1]).addClass('snakeCell');
+				$('tr').eq(snakeCells[cell][0] ).find('td').eq(snakeCells[cell][1]).addClass('snakeCell');
 			}
 			//snakeCells[10,11].addClass('adultPassengers');
 			
-			$('tr').eq( snakeCells[2][0]).find('td').eq(snakeCells[2][1]).addClass('snakeCellPassenger');	
+			$('tr').eq(snakeHead[0]).find('td').eq(snakeHead[1]).addClass(snakeClassHead);
+			$('tr').eq(snakeBack[4]).find('td').eq(snakeBack[1]).addClass(snakeClassBack);
+			$('tr').eq(snakeCells[1]).find('td').eq(snakeCells[2]).addClass('snakeCellPassenger');	
 			//$('tr').eq( snakeCells[10][0]).find('td').eq(snakeCells[11][1]).addClass('adultPassenger');
-			$('tr').eq( snakeHead[0] ).find('td').eq(snakeHead[1]).addClass('snakeHead');
+			
 		}
 
 		function getFruitCell() {
@@ -39,18 +44,31 @@ var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, 
 
 		function updateSnakeCell(){
 			var snakeNewHead = [];
+			var snakeNewBack = [];
 			switch(direction){
 				case 'right':
 					snakeNewHead = [ snakeHead[0], snakeHead[1]+1 ];
+					snakeNewBack = [ snakeBack[0], snakeBack[1]+1 ];
+					snakeClassHead = 'snakeHeadR';
+					snakeClassBack = 'snakeBackR';
 					break;
 				case 'left':
 					snakeNewHead = [ snakeHead[0], snakeHead[1]-1 ];
+					snakeNewBack = [ snakeBack[0], snakeBack[1]-1 ];
+					snakeClassHead = 'snakeHeadL';
+					snakeClassBack = 'snakeBackL';
 					break;
 				case 'up':
 					snakeNewHead = [ snakeHead[0]-1, snakeHead[1] ];
+					snakeNewBack = [ snakeBack[0]-1, snakeBack[1] ];
+					snakeClassHead = 'snakeHeadU';
+					snakeClassBack = 'snakeBackU';
 					break;
 				case 'down':
 					snakeNewHead = [ snakeHead[0]+1, snakeHead[1] ];
+					snakeNewBack = [ snakeBack[0]+1, snakeBack[1] ];
+					snakeClassHead = 'snakeHeadD';
+					snakeClassBack = 'snakeBackD';
 					break;
 			}
 			var newCell = {length:0}
@@ -173,22 +191,62 @@ var direction = 'right', speed = 100, ticker = null, fruitCell = [], score = 0, 
 			
 			var myString = JSON.stringify(myObject);
 			
-			alert(myString);
+			
 			$.ajax({
 			    url: '/Send',
-			    type: 'POST',
-			    data: JSON.stringify(myString),
-			    contentType: 'text/plain',
+			    type: 'GET',
+			    data: {'alias':$('#alias').val(), 'email':$('#email').val(),'score':score},
+			    contentType: 'application/json',
 			    dataType: 'json',
 			    async: false,
-			    success: function() {
-			        alert('Enviado ' + myString);
+			    success: function(data) {
+			    	showData(data, myObject.email);
 			    },
-			    error: function() {
-			    	alert('Enviado ' + myString);
+			    error: function(e) {
+			    	//alert('Enviado ' + e[1].alias);
 			    }
 			});
 			 
+		}
+		
+		function showData(data, me){
+			puntuacion.style.display = "none";	
+			var pos = 1;
+			var aux="";
+			var myLine="";
+			for (var key in data) {
+				if(pos<=10){
+				aux=aux+'<div id = "row">'
+				aux=aux+'<div id="col1">'
+				aux=aux+'<span>'+pos+'.</span>'
+				aux=aux+'</div>'
+				aux=aux+'<div id="col1">'
+				aux=aux+'<span>'+data[key].alias+'</span>'
+				aux=aux+'</div>'
+				aux=aux+'<div id="col1">'
+				aux=aux+'<span>'+data[key].best+'</span>'
+				aux=aux+'</div>	'
+				aux=aux+'</div>'
+				}
+				
+				if(me==data[key].email){
+					myLine=myLine+'<div id = "row">'
+					myLine=myLine+'<div id="col1">'
+					myLine=myLine+'<span> YOU '+pos+'.</span>'
+					myLine=myLine+'</div>'
+					myLine=myLine+'<div id="col1">'
+					myLine=myLine+'<span>'+data[key].alias+'</span>'
+					myLine=myLine+'</div>'
+					myLine=myLine+'<div id="col1">'
+					myLine=myLine+'<span>'+data[key].best+'</span>'
+					myLine=myLine+'</div>'
+					myLine=myLine+'</div>'
+				}
+				pos=parseInt(pos)+1
+		    }
+			
+			totalScoreHtml.innerHTML = totalScoreHtml.innerHTML+aux+myLine;			
+			totalScoreHtml.style.display = "block";
 		}
 
 		$( document ).ready(function(){
